@@ -23,12 +23,17 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
 
-     webServer: {
-      command: `npm run start`,
-      port: 3000,
-      timeout: 300 * 1000,
-      reuseExistingServer: false
-    }
+    //  webServer: {
+    //   command: `npm run start`,
+    //   port: 3000,
+    //   timeout: 300 * 1000,
+    //   reuseExistingServer: false
+    // }
+  },
+   webServer: {
+    command: 'yarn start',
+    url: 'http://localhost:3000/',
+    timeout: 120000,
   },
   projects: [
     {
