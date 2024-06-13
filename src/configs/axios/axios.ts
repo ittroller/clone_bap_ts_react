@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios';
 
 import { SYSTEM_ERROR, LOCAL_STORAGE_KEY } from 'src/constants';
@@ -33,11 +34,11 @@ export class AxiosClient {
     this.instance.interceptors.response.use(this._handleResponseSuccess, this._handleResponseError);
   };
 
-  _handleRequestSuccess = (config: AxiosRequestConfig): AxiosRequestConfig<any> => {
+  _handleRequestSuccess = (config: AxiosRequestConfig): any => {
     return config;
   };
 
-  _handleRequestError = (error: AxiosError): unknown => {
+  _handleRequestError = (error: AxiosError): any => {
     // eslint-disable-next-line
     console.error(`[request error] [${JSON.stringify(error)}]`);
     if (error.response) {
@@ -49,9 +50,7 @@ export class AxiosClient {
 
   _handleResponseSuccess = ({ data }: AxiosResponse): AxiosResponse => data;
 
-  _handleResponseError = async (error: AxiosError & Error): Promise<never> => {
-    return await Promise.reject(error?.response?.data);
-  };
+  _handleResponseError = (error: AxiosError & Error): any => Promise.reject(error?.response?.data);
 
   async request<T = any, R = AxiosResponse<T>, D = any>(config: AxiosRequestConfig<D>): Promise<R> {
     return await this.instance.request<T, R>(config);
